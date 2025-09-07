@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'profile_page.dart';
 
 class StudentPage extends StatefulWidget {
   const StudentPage({super.key});
@@ -13,13 +14,18 @@ class _StudentPageState extends State<StudentPage> {
   final List<String> subjects = ["Mathematics", "AI/ML", "Web Development"];
 
   void _onNavTapped(int index) {
+  if (index == 1) {
+    // Navigate to ProfilePage
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ProfilePage()),
+    );
+  } else {
     setState(() {
       _selectedIndex = index;
     });
-    if (index == 1) {
-      print("Profile Page Clicked"); // replace with Navigator.push later
-    }
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +159,7 @@ class _StudentPageState extends State<StudentPage> {
                     fontSize: 22,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
               ],
@@ -206,7 +212,7 @@ class _StudentPageState extends State<StudentPage> {
                     fontSize: 22,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
                 TextButton(
@@ -231,7 +237,7 @@ class _StudentPageState extends State<StudentPage> {
                     child: Container(
                       height: 200,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: const Color.fromARGB(255, 235, 205, 255),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Stack(
@@ -271,7 +277,7 @@ class _StudentPageState extends State<StudentPage> {
                           height: 90,
                           margin: const EdgeInsets.only(bottom: 16),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: const Color.fromARGB(255, 255, 208, 178),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Stack(
@@ -302,7 +308,7 @@ class _StudentPageState extends State<StudentPage> {
                         child: Container(
                           height: 90,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: const Color.fromARGB(255, 211, 255, 184),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Stack(

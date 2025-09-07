@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_1/pages/loading.dart';
 import 'dashboard.dart';
 
 
@@ -63,7 +64,7 @@ class LoginPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushReplacement(
     context,
-    MaterialPageRoute(builder: (context) => const DashboardPage()),
+    MaterialPageRoute(builder: (context) => const StudentPage()),
   );
                 },
                 style: ElevatedButton.styleFrom(
