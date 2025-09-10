@@ -7,22 +7,33 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white, // ✅ White background
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true, // ✅ Center the title
+        title: const Text(
+          "Profile",
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontFamily: "Poppins",
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Back Button
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back, color: Colors.black),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-
             const SizedBox(height: 10),
 
             // Profile Picture Placeholder
@@ -54,7 +65,7 @@ class ProfilePage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start, // 🔹 ensures top alignment
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Left side (tasks text)
                   Expanded(
@@ -80,7 +91,7 @@ class ProfilePage extends StatelessWidget {
 
                   // Right side (student sketch / placeholder image)
                   SizedBox(
-                    width: 120, // 🔹 reduced from 180 to prevent overflow
+                    width: 120,
                     height: 120,
                     child: Image.asset(
                       "asset/fonts/images/profile.png",
@@ -91,7 +102,7 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 20), // 🔹 reduced space before "My Badges"
+            const SizedBox(height: 20),
 
             // My Badges
             const Align(
@@ -105,7 +116,7 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 2), // 🔹 reduced space between title & grid
+            const SizedBox(height: 10),
 
             GridView.count(
               crossAxisCount: 3,
@@ -121,7 +132,7 @@ class ProfilePage extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 10), // 🔹 smaller gap before "My Courses"
+            const SizedBox(height: 20),
 
             // My Courses
             const Align(
@@ -138,21 +149,21 @@ class ProfilePage extends StatelessWidget {
 
             const SizedBox(height: 15),
 
-            // 🔹 Clickable course tiles
+            // Courses
             GestureDetector(
               onTap: () => print("AIML Clicked"),
               child: courseTile("AIML", "5 hours", 0.5),
             ),
             const SizedBox(height: 15),
             GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const CourseDetailsPage()),
-              );
-            },
-            child: courseTile("AIML", "5 hours", 0.5),
-          ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CourseDetailsPage()),
+                );
+              },
+              child: courseTile("AIML", "5 hours", 0.5),
+            ),
             const SizedBox(height: 15),
             GestureDetector(
               onTap: () => print("Cyber Security Clicked"),
@@ -164,15 +175,16 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // Badge widget
+  // Badge widget (✅ bigger size)
   static Widget badgeTile(String title, String imagePath) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(imagePath, height: 70), // 🔹 bigger badge
-        const SizedBox(height: 6),
+        Image.asset(imagePath, height: 90, width: 90), // 🔹 bigger badge
+        const SizedBox(height: 8),
         Text(
           title,
-          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           textAlign: TextAlign.center,
         ),
       ],
@@ -218,13 +230,13 @@ class ProfilePage extends StatelessWidget {
           const Spacer(),
           // Progress indicator
           SizedBox(
-            height: 40,
-            width: 40,
+            height: 50, // 🔹 slightly bigger
+            width: 50,
             child: CircularProgressIndicator(
               value: progress,
               color: Colors.green,
               backgroundColor: Colors.grey[300],
-              strokeWidth: 5,
+              strokeWidth: 6,
             ),
           ),
         ],

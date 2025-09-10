@@ -12,7 +12,11 @@ class _StudentPageState extends State<StudentPage> {
   int _selectedIndex = 0;
 
   final List<String> subjects = ["Mathematics", "AI/ML", "Web Development"];
-
+   final Map<String, String> subjectImages = {
+    "Mathematics": "asset/fonts/images/mathematics.jpg",
+    "AI/ML": "asset/fonts/images/ai_ml.jpg",
+    "Web Development": "asset/fonts/images/web_development.jpg",
+  };
   void _onNavTapped(int index) {
   if (index == 1) {
     // Navigate to ProfilePage
@@ -119,86 +123,131 @@ class _StudentPageState extends State<StudentPage> {
 
             const SizedBox(height: 20),
 
-            // Live Class (Clickable)
-            GestureDetector(
-              onTap: () {
-                print("Live Class Clicked");
-              },
+            // ✅ Live Class Section
+Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    const Text(
+      "Live Class",
+      style: TextStyle(
+        fontSize: 26,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Poppins',
+        color: Colors.black,
+      ),
+    ),
+    const SizedBox(height: 10),
+
+    // Live Class Box
+    GestureDetector(
+      onTap: () {
+        print("Live Class Clicked");
+      },
+      child: Container(
+        height: 180,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          image: const DecorationImage(
+            image: AssetImage("asset/fonts/images/joinClass.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Stack(
+          children: [
+            // 🔴 Red "LIVE" Icon
+            Positioned(
+              top: 10,
+              left: 10,
               child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                  color: Colors.deepPurple[400],
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: const [
-                    BoxShadow(color: Colors.black26, blurRadius: 8, offset: Offset(2, 4))
-                  ],
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Center(
-                  child: Text(
-                    "Live Class",
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Poppins',
-                      color: Colors.white,
-                    ),
+                child: const Text(
+                  "LIVE",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
+          ],
+        ),
+      ),
+    ),
+  ],
+),
 
             const SizedBox(height: 30),
 
             // Popular Courses
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
-                  "Popular Courses",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 0, 0, 0),
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: const [
+    Text(
+      "Popular Courses",
+      style: TextStyle(
+        fontSize: 22,
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.bold,
+        color: Color.fromARGB(255, 0, 0, 0),
+      ),
+    ),
+  ],
+),
+const SizedBox(height: 20),
+
+// ✅ Replace old ListView.builder with this one
+// ✅ Popular Courses
+SizedBox(
+  height: 200,
+  child: ListView.builder(
+    scrollDirection: Axis.horizontal,
+    itemCount: subjects.length,
+    itemBuilder: (context, index) {
+      return GestureDetector(
+        onTap: () {
+          print("${subjects[index]} Clicked");
+        },
+        child: Container(
+          width: 150,
+          margin: const EdgeInsets.only(right: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Image box
+              Container(
+                height: 120,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  image: DecorationImage(
+                    image: AssetImage(subjectImages[subjects[index]]!),
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(height: 20),
-
-            SizedBox(
-              height: 170,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: subjects.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      print("${subjects[index]} Clicked");
-                    },
-                    child: Container(
-                      width: 220,
-                      margin: const EdgeInsets.only(right: 16),
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple[300],
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Center(
-                        child: Text(
-                          subjects[index],
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Poppins',
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
               ),
-            ),
+              const SizedBox(height: 8),
+              // Text under image
+              Text(
+                subjects[index],
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Poppins',
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  ),
+),
+
+
 
             const SizedBox(height: 30),
 

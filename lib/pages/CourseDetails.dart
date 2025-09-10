@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'video_player.dart'; // adjust path if needed
 
 class CourseDetailsPage extends StatelessWidget {
   const CourseDetailsPage({super.key});
@@ -12,6 +13,7 @@ class CourseDetailsPage extends StatelessWidget {
           style: TextStyle(
             fontFamily: "Poppins",
             fontWeight: FontWeight.bold,
+            color: Colors.black,
           ),
         ),
         centerTitle: true,
@@ -30,36 +32,80 @@ class CourseDetailsPage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Video Placeholder
-            Container(
-              height: 200,
-              decoration: BoxDecoration(
-                color: Colors.black12,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Center(
-                child: Icon(Icons.play_circle_fill,
-                    size: 60, color: Colors.deepPurple),
+            // Video Placeholder with image
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const VideoPlayerPage()),
+                );
+              },
+              child: Stack(
+                children: [
+                  Container(
+                    height: 200,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      image: const DecorationImage(
+                        image: AssetImage("asset/fonts/images/course_detail.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Icon(Icons.play_circle_fill,
+                          size: 60, color: Colors.white), // ✅ White play button
+                    ),
+                  ),
+                ],
               ),
             ),
 
             const SizedBox(height: 20),
 
-            // Course Name
-            const Text(
-              "AI/ML",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                fontFamily: "Poppins",
-              ),
+            // AI/ML Heading + Forum Button with icon
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "AI/ML",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontFamily: "Poppins",
+                  ),
+                ),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    print("Forum Button Clicked");
+                  },
+                  icon: const Icon(Icons.forum, color: Colors.white, size: 20),
+                  label: const Text(
+                    "Forum",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ],
             ),
 
             const SizedBox(height: 10),
@@ -78,8 +124,9 @@ class CourseDetailsPage extends StatelessWidget {
 
             // Description Text
             const Text(
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-              "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              "This AI/ML course includes introduction to Machine Learning, "
+              "Neural Networks, Natural Language Processing, Computer Vision, "
+              "and hands-on projects to strengthen your skills.",
               style: TextStyle(fontSize: 14, color: Colors.grey, height: 1.4),
             ),
 
@@ -116,18 +163,32 @@ class CourseDetailsPage extends StatelessWidget {
             const SizedBox(height: 15),
 
             // Lesson Buttons
-            _lessonTile("Lecture 1", 0.3),
+            _lessonTile(
+              context,
+              "Lecture 1",
+              0.3,
+              () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const VideoPlayerPage()),
+                );
+              },
+            ),
             const SizedBox(height: 12),
-            _lessonTile("Lecture 2", 0.6),
+            _lessonTile(context, "Lecture 2", 0.6, () {
+              print("Lecture 2 tapped");
+            }),
             const SizedBox(height: 12),
-            _lessonTile("Lecture 3", 0.9),
+            _lessonTile(context, "Lecture 3", 0.9, () {
+              print("Lecture 3 tapped");
+            }),
           ],
         ),
       ),
     );
   }
 
-  // 🔹 Helper Widget for clickable Notes/Quizzes/Assignments
+  // Helper Widget for clickable Notes/Quizzes/Assignments
   static Widget _iconText(IconData icon, String label, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
@@ -148,12 +209,13 @@ class CourseDetailsPage extends StatelessWidget {
     );
   }
 
-  // 🔹 Helper Widget for Lessons
-  static Widget _lessonTile(String title, double progress) {
+  // Helper Widget for Lessons
+  static Widget _lessonTile(
+      BuildContext context, String title, double progress, VoidCallback onPlay) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 242, 229, 255), // very light purple
+        color: const Color.fromARGB(255, 242, 229, 255),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -171,16 +233,23 @@ class CourseDetailsPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Icon(Icons.play_circle_fill, color: Colors.deepPurple, size: 30),
+              InkWell(
+                onTap: onPlay,
+                child: const Icon(Icons.play_circle_fill,
+                    color: Colors.white, size: 30), // ✅ White play button
+              ),
             ],
           ),
           const SizedBox(height: 8),
-          LinearProgressIndicator(
-            value: progress,
-            color: Colors.deepPurple,
-            backgroundColor: Colors.deepPurple.shade100,
-            minHeight: 6,
+          ClipRRect(
             borderRadius: BorderRadius.circular(6),
+            child: LinearProgressIndicator(
+              value: progress,
+              minHeight: 6,
+              backgroundColor: Colors.deepPurple.shade100,
+              valueColor:
+                  const AlwaysStoppedAnimation<Color>(Colors.deepPurple),
+            ),
           ),
         ],
       ),

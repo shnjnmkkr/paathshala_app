@@ -19,7 +19,9 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.9.0
+  sdk: ">=2.17.0 <4.0.0"
+
+
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -30,14 +32,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  carousel_slider: ^4.1.1
-
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  carousel_slider: ^5.1.1
+  supabase_flutter: ^2.5.8
+  video_player: ^2.9.1
+  chewie: ^1.8.1
   cupertino_icons: ^1.0.8
+  connectivity_plus: ^6.0.3
+  network_info_plus: ^6.1.4
+  shelf: ^1.4.1
+  shelf_static: ^1.1.2
+  permission_handler: ^12.0.1
   
+
+
 
 dev_dependencies:
   flutter_test:
@@ -48,7 +55,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -76,6 +83,11 @@ flutter:
     - asset/fonts/images/asset4.png
     - asset/fonts/images/asset5.png
     - asset/fonts/images/asset6.png
+    - asset/fonts/images/joinClass.jpg
+    - asset/fonts/images/mathematics.jpg
+    - asset/fonts/images/ai_ml.jpg
+    - asset/fonts/images/web_development.jpg
+    - asset/fonts/images/course_detail.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

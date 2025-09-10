@@ -32,18 +32,20 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+
+	<!-- 🔑 Nearby Networking Permissions -->
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>We use the local network to discover and connect with nearby peers for video streaming.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_mpconn._tcp</string>
 	</array>
 </dict>
 </plist>
