@@ -52,18 +52,3 @@ This community-first approach to streaming makes Paathshaala especially powerful
 2. **Student Dashboard** → explore courses, join live classes, access lectures, notes, quizzes, flashcards
 3. **Teacher Dashboard** → schedule/upload lectures, create quizzes, respond to forum doubts
 4. **Streaming Engine** ensures resilient delivery based on real-time bandwidth
-
-# User Interface 
-<p float="left">
-  <img src="images/choose_role.png" alt="Choose Role" width="200" />
-  <img src="images/student_page.png" alt="Student Page" width="200" />
-  <img src="images/course_details.png" alt="Course Details" width="200" />
-</p>
-
-<p float="left">
-  <img src="images/notes.png" alt="Notes" width="200" />
-  <img src="images/quiz.png" alt="Quiz" width="200" />
-  <img src="images/teacher_page.png" alt="Teacher Page" width="200" />
-</p>
-
-
